@@ -6,6 +6,8 @@ from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSeria
 from django.http import Http404
 from rest_framework import status, permissions
 from .permissions import IsOwnerOrReadOnly
+from rest_framework.generics import DestroyAPIView
+
 
 class ProjectList(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -36,7 +38,6 @@ class ProjectDetail(APIView):
         IsOwnerOrReadOnly
     ]
 
-
     def get_object(self, pk):
         try:
             project = Project.objects.get(pk=pk)
@@ -63,6 +64,12 @@ class ProjectDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
 
+    def delete(self, request, pk):
+        project = self.get_object(pk)
+        data = request.data
+        project.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 class PledgeList(APIView):
     def get(self, request):
         pledges = Pledge.objects.all()
@@ -83,4 +90,3 @@ class PledgeList(APIView):
             status=status.HTTP_400_BAD_REQUEST
             )
     
-    # add update here
