@@ -6,6 +6,8 @@ from rest_framework import status, permissions
 from .models import CustomUser
 from .serializers import CustomUserSerializer
 from .permissions import IsUserOrReadOnly
+from .serializers import CustomUserDetailSerializer
+
 
 
 class CustomUserList(APIView):
@@ -38,7 +40,7 @@ class CustomUserDetail(APIView):
 		user = self.get_object(pk)
 		serializer = CustomUserSerializer(user)
 		return Response(serializer.data)
-# 
+		
 	def put(self, request, pk):
 		user = self.get_object(pk)
 		data = request.data
@@ -49,8 +51,8 @@ class CustomUserDetail(APIView):
         )   
 		if serializer.is_valid():
 			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_NO_CONTENT)
-		return Response(serializer.errors, status=status.HTTP_400_NO_CONTENT)
+			return Response(serializer.data)
+		return Response(serializer.errors)
 
 	def delete(self, request, pk):
 		user = self.get_object(pk)
