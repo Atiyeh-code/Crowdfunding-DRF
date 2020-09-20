@@ -12,6 +12,18 @@ class PledgeSerializer(serializers.Serializer):
     def create(self, validated_data):
         return Pledge.objects.create(**validated_data)
 
+# class update pledge- ATi added
+class PledgeDetailSerializer(PledgeSerializer):
+
+    def update(self, instance, validated_data):
+	    instance.amount = validated_data.get('amount', instance.amount)
+	    instance.comment = validated_data.get('comment', instance.comment)
+	    instance.anonymous = validated_data.get('anonymous', instance.anonymous)
+	    instance.project_id = validated_data.get('project_id', instance.project_id)
+	    instance.supporter_id  = validated_data.get('supporter_id', instance.supporter_id)
+	    instance.save()
+	    return instance
+
 class ProjectSerializer(serializers.Serializer):
     id =serializers.ReadOnlyField()
     title = serializers.CharField(max_length=200)
@@ -39,7 +51,7 @@ class ProjectDetailSerializer(ProjectSerializer):
 	    instance.save()
 	    return instance
 
-    # delete project
+# class delete project
     def delete(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
         instance.description = validated_data.get('description', instance.description)
@@ -50,3 +62,4 @@ class ProjectDetailSerializer(ProjectSerializer):
         instance.owner = validated_data.get('owner', instance.owner)
         instance.save()
         return instance
+
