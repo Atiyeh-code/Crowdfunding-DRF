@@ -11,7 +11,6 @@ from .serializers import CustomUserDetailSerializer
 
 
 class CustomUserList(APIView):
-	
 	def get(self, request):
 		users = CustomUser.objects.all()
 		serializer = CustomUserSerializer(users, many=True)

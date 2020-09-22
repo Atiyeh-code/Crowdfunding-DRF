@@ -90,7 +90,6 @@ class PledgeList(APIView):
             status=status.HTTP_400_BAD_REQUEST
             )
 
-#   
 class PledgeDetail(APIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly, 
@@ -122,3 +121,10 @@ class PledgeDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
+    def delete(self, request, pk):
+        pledge = self.get_object(pk)
+        data = request.data
+        pledge.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
