@@ -8,8 +8,6 @@ from .serializers import CustomUserSerializer
 from .permissions import IsUserOrReadOnly
 from .serializers import CustomUserDetailSerializer
 
-
-
 class CustomUserList(APIView):
 	def get(self, request):
 		users = CustomUser.objects.all()
@@ -22,6 +20,7 @@ class CustomUserList(APIView):
 			serializer.save()
 			return Response(serializer.data)
 		return Response(serializer.errors)
+	
 		
 class CustomUserDetail(APIView):
 	permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsUserOrReadOnly]
@@ -58,3 +57,5 @@ class CustomUserDetail(APIView):
 		data = request.data
 		user.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
+
+	
