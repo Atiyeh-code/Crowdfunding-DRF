@@ -35,11 +35,13 @@ CORS_ORIGIN_ALLOW_All = True
 # Application definition
 
 INSTALLED_APPS = [
+    'projects.apps.ProjectsConfig',
+    'users.apps.UsersConfig',
+
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'projects.apps.ProjectsConfig',
-    'users.apps.UsersConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,8 +59,8 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
