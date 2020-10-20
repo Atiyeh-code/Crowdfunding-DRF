@@ -48,11 +48,6 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
-CORS_ORIGIN_WHITELIST = (
-    'http//:localhost:3000',
-    'https://shrouded-falls-40894.herokuapp.com',
-)
-
 
 # Application definition
 
