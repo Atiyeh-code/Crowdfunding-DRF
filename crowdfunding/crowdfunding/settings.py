@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get(
     'h$7(zgknje*7+!u&24jt#ktxj5ttz((%*4hc(*p=7or@!1ly$9'
 )
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG') != False
+DEBUG = os.environ.get('DJANGO_DEBUG') != 'False'
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
